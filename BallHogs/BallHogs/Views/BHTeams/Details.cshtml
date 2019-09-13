@@ -26,17 +26,26 @@
     <h5>Players</h5>
     @if (Model.Players != null)
     {
-        <dl class="row">
-            @foreach (var player in Model.Players)
+<dl class="row">
+    @foreach (var player in Model.Players)
+    {
+        <dd class="col-sm-10">
+            @player.Name
+        </dd>
+        <dd class="col-sm-10">
+            @if (player.Year != 2018)
             {
-                <dd class="col-sm-10">
-                    @player.Name
-                </dd>
-                <dd class="col-sm-10">
-                    @player.Position
-                </dd>
+                @player.Year
             }
-        </dl>
+            @player.Position
+        </dd>
+        <dd>
+            <form method="post">
+                <button type="submit" asp-controller="PlayersOnTeams" asp-action="RemovePlayer" asp-route-id="@player.PlayersOnTeamsId">Remove Player</button>
+            </form>
+        </dd>
+    }
+</dl>
     }
     @if (Model.Players == null || Model.Players.Count < 5)
     {
